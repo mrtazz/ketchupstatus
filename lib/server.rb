@@ -27,8 +27,11 @@ class KetchupStatus
 
     get '/:office' do
       @office = params[:office]
-      @image = "ketchup_empty.png"
-      mustache :status, :office => @office, :image => @image
+      @value = @offices[params[:office]]
+      @image = @offices[params[:office]]
+      mustache :status, :office => @office, :image => @image, :value => @value
+    end
+
     post '/:office/:value' do
       @offices[params[:office]] = params[:value]
       "You would've set the bottle for #{params[:office]} to #{params[:value]}!"
