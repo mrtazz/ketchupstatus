@@ -7,7 +7,11 @@ class KetchupStatus
         end
 
         def image
-          "foo.png"
+          @image || "0"
+        end
+
+        def value
+          @value || "0"
         end
       end
     end
