@@ -18,6 +18,7 @@ class KetchupStatus
 
     def initialize(*args)
       super
+      @offices = Hash.new
     end
 
     get '/' do
@@ -28,6 +29,9 @@ class KetchupStatus
       @office = params[:office]
       @image = "ketchup_empty.png"
       mustache :status, :office => @office, :image => @image
+    post '/:office/:value' do
+      @offices[params[:office]] = params[:value]
+      "You would've set the bottle for #{params[:office]} to #{params[:value]}!"
     end
 
 
