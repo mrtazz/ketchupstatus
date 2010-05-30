@@ -4,47 +4,47 @@ require 'mustache/sinatra'
 require 'lib/data'
 
 class KetchupStatus
+
   class Server < Sinatra::Base
     register Mustache::Sinatra
 
-    @base_dir = File.dirname(__FILE__) + '/../'
+    require Dir.pwd + '/views/layout'
+
     set :logging, :true
-    set :public, @base_dir  + 'static'
+    set :root, File.dirname(__FILE__)
+    set :public, "#{Dir.pwd}/static"
 
     set :mustache, {
-      :views     => @base_dir + 'views/',
-      :templates => @base_dir + 'templates/'
+      :views     => "#{Dir.pwd}/views/",
+      :templates => "#{Dir.pwd}/templates/",
+      :namespace => KetchupStatus
     }
 
-    set :namespace, KetchupStatus::Server
-
-    def initialize(*args)
-      super
-      #@offices = Hash.new
-    end
-
     get '/' do
-      "Hello World!"
+      mustache :index
     end
 
-    get '/:office' do
-      office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
-      puts office
-      puts office.office
-      puts office.status
-      if office then
-        mustache :status, :office => office.office,
-                          :image => office.status,
-                          :value => office.status
+    get '/offices/:office' do
+      puts ":office param " + params[:office].to_s
+      o = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
+      puts "Office obj "
+      puts o
+      if o
+        puts "office.office " + o.office
+        puts "office.status " + o.status.to_s
+        @office = o.office
+        @image = o.status.to_s
+        @value = o.status.to_s
+        mustache :status
       else
         404
       end
     end
 
-    post '/:office/:value' do
+    post '/offices/:office/:value' do
       office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
       if office then
-        office.status = :value.to_i
+        office.status = params[:value].to_i
         office.save
       else
         o = KetchupStatus::Data::Office.new
@@ -56,4 +56,5 @@ class KetchupStatus
     end
 
   end
+
 end
