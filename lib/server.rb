@@ -64,6 +64,7 @@ class KetchupStatus
         # set value and store
         office.status = value
         office.save
+        "Update successful!"
       else
         403
       end
