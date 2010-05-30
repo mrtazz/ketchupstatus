@@ -73,7 +73,10 @@ class KetchupStatus
         o.status = 0
         o.token = Digest::MD5.hexdigest(Time.now.to_s + rand.to_s + params[:office]).to_s
         o.save
-        "Your precious token: #{o.token.to_s}"
+        @name = o.office.to_s
+        @token = o.token.to_s
+
+        mustache :confirm, :layout => false
       end
     end
 
