@@ -6,7 +6,7 @@ $(document).ready(function()
 
   function register_office()
   {
-    var url = "/offices/"+$("#office").attr("value");
+    var url = "/ketchup/"+$("#office").attr("value");
     var res = $.post(url, {}, show_info);
   }
 

@@ -27,14 +27,9 @@ class KetchupStatus
     end
 
     # get status
-    get '/offices/:office' do
-      puts ":office param " + params[:office].to_s
+    get '/ketchup/:office' do
       o = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
-      puts "Office obj "
-      puts o
       if o
-        puts "office.office " + o.office
-        puts "office.status " + o.status.to_s
         @office = o.office
         @image = o.status.to_s
         @value = o.status.to_s
@@ -44,8 +39,20 @@ class KetchupStatus
       end
     end
 
+    # status update webform
+    get '/ketchup/:office/:token' do
+      office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
+      if office and params[:token].to_s.eql? office.token.to_s
+        @name = params[:office].to_s
+        @token = params[:token].to_s
+        mustache :update
+      else
+        404
+      end
+    end
+
     # update value
-    post '/offices/:office/:token/:value' do
+    post '/ketchup/:office/:token/:value' do
       office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
       if office and params[:token].to_s.eql? office.token.to_s
         # set to allowed values
@@ -63,7 +70,7 @@ class KetchupStatus
     end
 
     # create new office
-    post '/offices/:office' do
+    post '/ketchup/:office' do
       office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
       if office
         "Office exists already. Please choose another name."
