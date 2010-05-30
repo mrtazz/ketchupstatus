@@ -1,0 +1,29 @@
+body
+{
+  font-family: Arial, verdana;
+}
+h1
+{
+  font-size: 40px;
+  color: #BA2020;
+}
+h2
+{
+  font-size: 30px;
+  color: #1CB009;
+}
+#content
+{
+  text-align: center;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 230px;
+}
+#register
+{
+  text-align: center;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 1px;
+  width: 50px;
+}

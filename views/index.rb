@@ -1,8 +1,11 @@
 class KetchupStatus
   module Views
     class Index < Layout
-      def titletwo
-        "Hello World!"
+      def headline
+        @headline || "Ketchup Status"
+      end
+      def byline
+        @byline || "Status of shared Ketchup resources."
       end
     end
   end
