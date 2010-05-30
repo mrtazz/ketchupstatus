@@ -21,10 +21,12 @@ class KetchupStatus
       :namespace => KetchupStatus
     }
 
+    # index page
     get '/' do
       mustache :index
     end
 
+    # get status
     get '/offices/:office' do
       puts ":office param " + params[:office].to_s
       o = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
@@ -42,12 +44,24 @@ class KetchupStatus
       end
     end
 
-    post '/offices/:office/:value' do
+    # update value
+    post '/offices/:office/:token/:value' do
       office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
-      if office then
-        office.status = params[:value].to_i
+      if office and params[:token].to_s.eql? office.token.to_s
+        # set to allowed values
+        value = 100 if params[:value].to_i >= 100
+        value = 75 if params[:value].to_i >= 75 and params[:value].to_i < 100
+        value = 50 if params[:value].to_i >= 50 and params[:value].to_i < 75
+        value = 25 if params[:value].to_i >= 25 and params[:value].to_i < 50
+        value = 0 if params[:value].to_i < 25
+        # set value and store
+        office.status = value
         office.save
       else
+        403
+      end
+    end
+
     # create new office
     post '/offices/:office' do
       office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
