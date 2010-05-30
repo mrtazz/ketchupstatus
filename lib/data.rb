@@ -5,7 +5,7 @@ class KetchupStatus
 ### Data definitions
   module Data
 
-    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/db.sqlite")
+    DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/db.sqlite")
 
     class Office
       include DataMapper::Resource
