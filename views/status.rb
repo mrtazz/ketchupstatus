@@ -1,18 +1,16 @@
 class KetchupStatus
-  class Server
-    module Views
-      class Status < Mustache
-        def office
-          "FooOffice"
-        end
+  module Views
+    class Status < Layout
+      def office
+        @office || "FooOffice"
+      end
 
-        def image
-          @image || "0"
-        end
+      def image
+        @image || "0"
+      end
 
-        def value
-          @value || "0"
-        end
+      def value
+        @value || "0"
       end
     end
   end
