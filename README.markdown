@@ -8,3 +8,7 @@ next door, we always forget to check if we have enough ketchup left.
 
 So I quickly threw together a simple sinatra web app to set and check the
 status.
+
+## Thanks
+[Kevin](http://twitter.com/thesndwichmn) for quickly creating pics and
+design on a Friday evening.
