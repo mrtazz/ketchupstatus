@@ -12,7 +12,7 @@ $(document).ready(function()
 
   function show_info(data, textstatus)
   {
-    alert("Foo bar bla!" + data);
+    alert(data);
   }
 
 
