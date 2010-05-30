@@ -9,8 +9,8 @@ class KetchupStatus
         @token
       end
 
-      def webform
-        @baseurl.to_s + "/" + @name.to_s + "/" + @token.to_s
+      def url
+        @name.to_s + "/" + @token.to_s
       end
     end
   end
