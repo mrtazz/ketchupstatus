@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra/base'
 require 'mustache/sinatra'
+require 'digest/md5'
 require 'lib/data'
 
 class KetchupStatus
@@ -47,11 +48,18 @@ class KetchupStatus
         office.status = params[:value].to_i
         office.save
       else
+    # create new office
+    post '/offices/:office' do
+      office = KetchupStatus::Data::Office.first(:office => params[:office].to_s)
+      if office
+        "Office exists already. Please choose another name."
+      else
         o = KetchupStatus::Data::Office.new
         o.office = params[:office]
-        o.status = params[:value].to_i
+        o.status = 0
+        o.token = Digest::MD5.hexdigest(Time.now.to_s + rand.to_s + params[:office]).to_s
         o.save
-        "You would've set the bottle for #{params[:office]} to #{params[:value]}!"
+        "Your precious token: #{o.token.to_s}"
       end
     end
 
