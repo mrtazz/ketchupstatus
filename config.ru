@@ -1,2 +1,2 @@
 require 'lib/server'
-run Sinatra::Application
+run KetchupStatus::Server
