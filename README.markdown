@@ -14,15 +14,15 @@ There are some rather simple API endpoints:
 
 Update your ketchup:
 
-  POST /ketchup/$yourketchup/$token/$value
+    POST /ketchup/$yourketchup/$token/$value
 
 Status of your ketchup:
 
-  GET /ketchup/$yourketchup
+    GET /ketchup/$yourketchup
 
 Create new ketchup:
 
-  POST /ketchup/$desiredname
+    POST /ketchup/$desiredname
 
 ## Beware
 You only get the token once and there is no way to recover it at the moment.
