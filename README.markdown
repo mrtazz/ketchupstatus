@@ -1,12 +1,12 @@
 # ketchupstatus
-Displays the status of your office's community ketchup.
+Displays status of your shared ketchup resources.
 
 ## Background
-In our office Monday is chicken & fries day. And we always have a bottle
-of ketchup which we share. However before buying groceries in the supermarket
+In our office Monday is chicken/fries/burger day. And we always have a bottle
+of ketchup which we share. However before buying burgers in the supermarket
 next door, we always forget to check if we have enough ketchup left.
 
-So I quickly threw together a simple sinatra web app to set and check the
+So I quickly threw together a simple sinatra app to set and check the
 status.
 
 ## API
