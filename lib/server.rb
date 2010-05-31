@@ -9,15 +9,16 @@ class KetchupStatus
   class Server < Sinatra::Base
     register Mustache::Sinatra
 
-    require Dir.pwd + '/views/layout'
+    base = File.dirname(__FILE__) + "/.."
 
     set :logging, :true
     set :root, File.dirname(__FILE__)
-    set :public, "#{Dir.pwd}/static"
+    set :public, "#{base}/static"
+    require base + '/views/layout'
 
     set :mustache, {
-      :views     => "#{Dir.pwd}/views/",
-      :templates => "#{Dir.pwd}/templates/",
+      :views     => "#{base}/views/",
+      :templates => "#{base}/templates/",
       :namespace => KetchupStatus
     }
 
